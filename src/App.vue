@@ -3,7 +3,6 @@
   import TodoList from "@/components/TodoList.vue";
   import type {Todo} from "@/types/main";
   import {getTodos} from "@/helpers/getTodos";
-import { todo } from "node:test";
   import TodoCreator from "@/components/TodoCreator.vue";
 
   export default defineComponent({
