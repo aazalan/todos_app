@@ -1,0 +1,31 @@
+
+.primary {
+    background: #4a78ac;
+}
+
+.danger {
+    background: #a63c3c;
+}
+
+.success {
+    background: #63914a;
+}
+
+.todo-default {
+    border: 2px solid #63914a;
+    margin: 5px;
+    padding: 5px;
+}
+
+.todo-timeframed {
+    border: 2px solid #9f652b;
+    margin: 5px;
+    padding: 5px;
+}
+
+
+.todo-urgent {
+    border: 2px solid #a63c3c;
+    margin: 5px;
+    padding: 5px;
+}
