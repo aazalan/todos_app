@@ -41,6 +41,7 @@
     padding: 10px;
     border-radius: 5px;
     margin: 5px;
+    width: 50%;
   }
 
   .todo-select {

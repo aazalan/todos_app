@@ -14,6 +14,7 @@
 <template>
   <div class="todo-list" :class="{'done-todo-list': isDone}">
     <div v-for="todo in todos" :key="todo.id" :class="`todo-${todo.type}`">
+      <input type="checkbox" name="isDone" id="isDone" v-model="todo.isDone" @change="$emit('onStatusChange', todo)"/>
       <span :class="{'crossed-text': isDone}">{{ todo.text }}</span>
     </div>
   </div>

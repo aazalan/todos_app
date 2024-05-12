@@ -17,7 +17,7 @@ export const getTodos = async ():Promise<Todo[]>  =>  {
             isFavorite: false,
         },
         {
-            id: 2,
+            id: 3,
             type: 'urgent',
             text: 'Убрать комнату',
             isDone: true,

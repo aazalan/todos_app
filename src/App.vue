@@ -28,6 +28,16 @@
        async getTodos(): Promise<Todo[]> {
         return await getTodos();
       },
+
+      replaceToDoneList(replacingTodo: Todo) {
+        this.doneTodos.push(replacingTodo);
+        this.actualTodos = this.actualTodos.filter(todo => todo.id !== replacingTodo.id);
+      },
+
+      replaceToNotDoneList(replacingTodo: Todo) {
+         this.actualTodos.push(replacingTodo);
+         this.doneTodos = this.doneTodos.filter(todo => todo.id !== replacingTodo.id);
+      },
     }
   });
 </script>
@@ -35,8 +45,8 @@
 <template>
   <TodoCreator />
 
-  <TodoList :todos="actualTodos" />
-  <TodoList :todos="doneTodos" :isDone="true"/>
+  <TodoList :todos="actualTodos" @on-status-change="replaceToDoneList"/>
+  <TodoList :todos="doneTodos"  @on-status-change="replaceToNotDoneList" :isDone="true"/>
 </template>
 
 <style scoped>
