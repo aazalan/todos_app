@@ -7,7 +7,11 @@
     props: {
       todos: Object as PropType<Todo[]>,
       isDone: Boolean,
-    }
+    },
+
+    emits: {
+      onStatusChange: (todo: Todo) => true,
+    },
   });
 </script>
 

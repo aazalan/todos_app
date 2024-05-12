@@ -30,7 +30,7 @@
       },
 
       replaceToDoneList(replacingTodo: Todo) {
-        this.doneTodos.push(replacingTodo);
+        this.doneTodos.unshift(replacingTodo);
         this.actualTodos = this.actualTodos.filter(todo => todo.id !== replacingTodo.id);
       },
 
