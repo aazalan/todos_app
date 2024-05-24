@@ -15,9 +15,14 @@
         };
     },
 
+    emits: {
+      addTodo: (todo: Todo) => true,
+    },
+
     methods: {
       createTodo() {
-
+        this.$emit('addTodo', this.newTodo);
+        this.newTodo = {type: 'default'} as Todo;
       }
     }
   });

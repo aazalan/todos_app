@@ -28,5 +28,6 @@
     color: aliceblue;
     border: 0;
     margin: 5px;
+    cursor: pointer;
   }
 </style>

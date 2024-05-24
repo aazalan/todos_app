@@ -15,13 +15,14 @@
       return {
         actualTodos: [] as Todo[],
         doneTodos: [] as Todo[],
+        todos: [] as Todo[],
       }
     },
 
     async created() {
-      const todos = await this.getTodos();
-      this.actualTodos.push(...todos.filter(todo => !todo.isDone));
-      this.doneTodos.push( ...todos.filter(todo => todo.isDone));
+      this.todos = await this.getTodos();
+      this.actualTodos.push(...this.todos.filter(todo => !todo.isDone));
+      this.doneTodos.push( ...this.todos.filter(todo => todo.isDone));
     },
 
     methods: {
@@ -38,15 +39,29 @@
          this.actualTodos.push(replacingTodo);
          this.doneTodos = this.doneTodos.filter(todo => todo.id !== replacingTodo.id);
       },
+
+      deleteTodo(deletingTodo: Todo) {
+        if (deletingTodo.isDone) {
+          this.doneTodos = this.doneTodos.filter(todo => todo.id !== deletingTodo.id);
+        } else {
+          this.actualTodos = this.actualTodos.filter(todo => todo.id !== deletingTodo.id);
+        }
+      },
+
+      addTodo(todo: Todo) {
+        const newTodoId = this.todos.reduce((max, obj) => obj.id > max.id ? obj : max, this.todos[0]).id + 1;
+        this.todos.push({...todo, id: newTodoId});
+        this.actualTodos.push({...todo, id: newTodoId});
+      }
     }
   });
 </script>
 
 <template>
-  <TodoCreator />
+  <TodoCreator @add-todo="addTodo" />
 
-  <TodoList :todos="actualTodos" @on-status-change="replaceToDoneList"/>
-  <TodoList :todos="doneTodos"  @on-status-change="replaceToNotDoneList" :isDone="true"/>
+  <TodoList :todos="actualTodos" @on-status-change="replaceToDoneList" @delete-todo="deleteTodo" />
+  <TodoList v-if="doneTodos.length > 0" :todos="doneTodos"  @on-status-change="replaceToNotDoneList" @delete-todo="deleteTodo" :isDone="true" />
 </template>
 
 <style scoped>

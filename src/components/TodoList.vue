@@ -11,15 +11,19 @@
 
     emits: {
       onStatusChange: (todo: Todo) => true,
+      deleteTodo: (todo: Todo) => true,
     },
   });
 </script>
 
 <template>
   <div class="todo-list" :class="{'done-todo-list': isDone}">
-    <div v-for="todo in todos" :key="todo.id" :class="`todo-${todo.type}`">
-      <input type="checkbox" name="isDone" id="isDone" v-model="todo.isDone" @change="$emit('onStatusChange', todo)"/>
-      <span :class="{'crossed-text': isDone}">{{ todo.text }}</span>
+    <div class="todo-task" v-for="todo in todos" :key="todo.id" :class="`todo-${todo.type}`">
+      <div>
+        <input type="checkbox" name="isDone" id="isDone" v-model="todo.isDone" @change="$emit('onStatusChange', todo)"/>
+        <span :class="{'crossed-text': isDone}">{{ todo.text }}</span>
+      </div>
+      <i class="pi pi-trash todo-delete-icon" @click="$emit('deleteTodo', todo)"></i>
     </div>
   </div>
 </template>
@@ -36,5 +40,19 @@
 
   .done-todo-list {
     border-top: 1px solid #525860;
+  }
+
+  .todo-task {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .todo-delete-icon {
+    align-self: center;
+    cursor: pointer;
+  }
+
+  .todo-delete-icon:hover {
+    color: #525860;
   }
 </style>
